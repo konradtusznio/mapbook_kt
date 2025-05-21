@@ -1,33 +1,21 @@
-def get_user_info(users_data: list) -> None:
-    for user in users_data:
-        print(f'Twój znajomy {user['name']} z miejscowości {user['location']} opublikował: {user["posts"]} postów')
+import requests
+from bs4 import BeautifulSoup
+import folium
 
+users: list = [
+    {'name': 'Julia', 'location': 'Ząbki', 'posts': 10},
+    {'name': 'Klaudia', 'location': 'Warszawa', 'posts': 10},
+    {'name': 'Szymon', 'location': 'Ostrołęka', 'posts': 10},
+    {'name': 'Julia', 'location': 'Ząbki', 'posts': 10},
+    {'name': 'Julia', 'location': 'Sokółka', 'posts': 20},
+    {'name': 'Klaudia', 'location': 'Warszawa', 'posts': 15},
+    {'name': 'Marcin', 'location': 'Grudziądz', 'posts': 1000},
+    {'name': 'Mateusz', 'location': 'Lublin', 'posts': 100},
 
-def add_user(users_data: list) -> None:
-    new_name: str = input('Podaj imię nowego znajomego: ')
-    new_location: str = input('Podaj lokalizację: ')
-    new_post: int = int(input('Podaj liczbę postów: '))
-    users_data.append({'name': new_name, 'location': new_location, 'posts': new_post})
+]
 
-
-def remove_user(users_data: list) -> None:
-    user_name: str = input('Wpisz kogo chcesz usunąć: ')
-    for user in users_data:
-        if user['name'] == user_name:
-            users_data.remove(user)
-
-
-def update_user(users_data: list) -> None:
-    user_name: str = input('Wpisz kogo chcesz zmienić: ')
-    for user in users_data:
-        if user['name'] == user_name:
-            user['name'] = input('Podaj nowe imię: ')
-            user['location'] = input('Podaj nową lokalizację: ')
-            user['posts'] = input('Podaj liczbę postów: ')
 
 def get_cordinates(location_name: str) -> list:
-    from bs4 import BeautifulSoup
-    import requests
     adress_url = f'https://pl.wikipedia.org/wiki/{location_name}'
     response = requests.get(adress_url)
     if response.status_code == 200:
@@ -37,9 +25,10 @@ def get_cordinates(location_name: str) -> list:
             float(response_html.select('.longitude')[1].text.replace(',', '.'))
         ]
 
-def get_mapa = (users_data: :List[dict])->None:
-    import folium
 
+coordinates = get_cordinates('Warszawa')
+print(coordinates)
+def get_mapa = folium.Map(location=coordinates, zoom_start=6, tiles='OpenStreetMap')
     for user in users:
         folium.Marker(
             location=get_cordinates(user['location']),
