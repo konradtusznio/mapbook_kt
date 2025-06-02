@@ -86,11 +86,14 @@ label_szczegoly_obiektu_surname_wartosc.grid(row=1, column=3)
 label_szczegoly_obiektu_miejscowosc=Label(ramka_szczegoly_obiektow, text="Miejscowosc")
 label_szczegoly_obiektu_miejscowosc.grid(row=1, column=4)
 
+label_szczegoly_obiektu_miejscowosc_wartsc=Label(ramka_szczegoly_obiektow, text="....")
+label_szczegoly_obiektu_miejscowosc_wartsc.grid(row=1, column=5)
+
 label_szczegoly_obiektu_miejscowosc_wartosc=Label(ramka_szczegoly_obiektow, text="Posty")
-label_szczegoly_obiektu_miejscowosc_wartosc.grid(row=1, column=4)
+label_szczegoly_obiektu_miejscowosc_wartosc.grid(row=1, column=5)
 
 label_szczegoly_obiektu_posts_wartosc=Label(ramka_szczegoly_obiektow, text="....")
-label_szczegoly_obiektu_posts_wartosc.grid(row=1, column=5)
+label_szczegoly_obiektu_posts_wartosc.grid(row=1, column=6)
 
 
 map_widget = tkintermapview.TkinterMapView(ramka_mapa, width=800, height=400, corner_radius=0)
