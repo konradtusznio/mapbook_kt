@@ -6,13 +6,13 @@ users: list = []
 
 
 class User:
-    def __init__(self, name, surname, location, posts):
+    def __init__(self, name, surname, location, posts, map_widget):
         self.name = name
         self.surname = surname
         self.location = location
         self.posts = posts
-        self.coordinates = self.get_cordinates()
-        self.marker = map_widget.set_marker(self.coordinates[0], self.coordinates[1],
+        self.cordinates = self.get_cordinates()
+        self.marker = map_widget.set_marker(self.cordinates[0], self.cordinates[1],
                                             text=f'{self.name} {self.surname}')
 
     def get_cordinates(self) -> list:
@@ -34,7 +34,7 @@ def add_user() -> None:
     location = entry_miejscowosc.get()
     posts = entry_posts.get()
 
-    user = User(name=name, surname=surname, location=location, posts=posts)
+    user = User(name=name, surname=surname, location=location, posts=posts, map_widget=map_widget)
 
     users.append(user)
 
@@ -89,9 +89,9 @@ def update_users(i) -> None:
     users[i].location = location
     users[i].posts = posts
 
-    users[i].coordinates = users[i].get_coordinates()
+    users[i].cordinates = users[i].get_cordinates()
     users[i].marker.delete()
-    users[i].marker = map_widget.set_marker(users[i].coordinates[0], users[i].coordinates[1],
+    users[i].marker = map_widget.set_marker(users[i].cordinates[0], users[i].cordinates[1],
                                             text=f'{users[i].name} {users[i].surname}')
 
     show_users()
@@ -114,7 +114,7 @@ def show_user_details():
     label_szczegoly_obiektu_posts_wartosc.config(text=users[i].posts)
 
     map_widget.set_zoom(15)
-    map_widget.set_position(users[i].coordinates[0], users[i].coordinates[1])
+    map_widget.set_position(users[i].cordinates[0], users[i].cordinates[1])
 
 
 root = Tk()
@@ -204,10 +204,10 @@ label_szczegoly_obiektu_miejscowosc_wartosc = Label(ramka_szczegoly_obiektow, te
 label_szczegoly_obiektu_miejscowosc_wartosc.grid(row=1, column=5)
 
 label_szczegoly_obiektu_posts_wartosc = Label(ramka_szczegoly_obiektow, text="Posty")
-label_szczegoly_obiektu_posts_wartosc.grid(row=1, column=5)
+label_szczegoly_obiektu_posts_wartosc.grid(row=1, column=6)
 
 label_szczegoly_obiektu_posts_wartosc = Label(ramka_szczegoly_obiektow, text="....")
-label_szczegoly_obiektu_posts_wartosc.grid(row=1, column=6)
+label_szczegoly_obiektu_posts_wartosc.grid(row=1, column=7)
 
 map_widget = tkintermapview.TkinterMapView(ramka_mapa, width=800, height=400, corner_radius=0)
 map_widget.grid(row=0, column=0, columnspan=2)
